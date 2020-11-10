@@ -7,7 +7,7 @@ if (isset($_SERVER['HTTPS']) and !empty($_SERVER['HTTPS'])) {
 
 echo "<html>\n  <head>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n  </head>\n  <body>\n";
 
-echo "<h1>Bienvenu sur la page de service de XXXXXXX</h1>\n";
+echo "<h1>Bienvenu sur la page de service de example.com</h1>\n";
 echo "<h3>vous etes connecter sur: ".$_SERVER['HTTP_HOST']."</h3><hr>\n\n";
 
 
@@ -52,7 +52,7 @@ function get_certificate() {
   if ( !empty($_SESSION['uid']) ){
     if ( validate_certificate() == "expired" ) {
        // generate a new certificate
-       exec('/usr/bin/ca_tools -u '.$_SESSION['uid'].' 2>&1', $out);
+       exec('/usr/bin/ca_tools -u -o -c -w '.$_SESSION['uid'].' 2>&1', $out);
       if (file_exists('/var/www/html/secure/users/'.$_SESSION['uid'].'.zip') )    {
         echo "<a href=\"https:\/\/".$_SERVER['HTTP_HOST']."/secure/users/".$_SESSION['uid'].".zip\">t&eacute;l&eacute;charger votre certificat usager</a>";
       }
@@ -63,7 +63,7 @@ function get_certificate() {
       if ( file_exists('/var/www/html/secure/users/'.$_SESSION['uid'].'.zip')) {
         echo "<a href=\"https:\/\/".$_SERVER['HTTP_HOST']."/secure/users/".$_SESSION['uid'].".zip\">t&eacute;l&eacute;charger votre certificat usager</a>";
       } else { 
-      exec('/usr/bin/ca_tools -u '.$_SESSION['uid'].' 2>&1', $out); 
+      exec('/usr/bin/ca_tools -u  -o -c -w '.$_SESSION['uid'].' 2>&1', $out); 
     //  print_r($out);
         echo "<a href=\"https:\/\/".$_SERVER['HTTP_HOST']."/secure/users/".$_SESSION['uid'].".zip\">t&eacute;l&eacute;charger votre certificat usager</a>";
       }
@@ -122,7 +122,7 @@ echo "si vous avez re&ccedil;u une erreur svp t&eacute;l&eacute;chargez et insta
 echo  "<a href=\"https:\/\/".$_SERVER['HTTP_HOST']."/ca-chain.cert.pem\">ca-chain</a> <br>";
 
 echo "<ul>";
-//echo "<li>Demander un acces au reseau SVDX.net.</li>";
+//echo "<li>Demander un acces au reseau example.com.</li>";
 echo "<li><a href=\"?dest=resetpwd\">R&eacute;initialiser votre mot de passe.</a></li>";
 echo "<li><a href=\"https:\/\/".$_SERVER['HTTP_HOST']."/index.php?dest=login\">Ouvrir une session</a></li>";
 echo "</ul>";
