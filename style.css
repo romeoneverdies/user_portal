@@ -1,0 +1,15 @@
+
+.content {}
+.row {
+text-align:center;
+padding:10px;
+
+}
+
+.err {
+text-align:center;
+color:red;
+font-weight:bold;
+
+
+}
